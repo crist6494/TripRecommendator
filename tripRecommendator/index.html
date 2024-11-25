@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripRecommendator</title>
+    <link rel="icon" href="./resources/17189827.png">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+    <div class="">
+        <div class="header text-left w-100 d-flex align-items-center gap-3 py-4">
+            <img src="./resources/17189827.png" alt="">
+            <h1>TripRecommendator</h1>
+        </div>
+        <div class="form shadow-sm mt-5">
+            <h4 class="text-uppercase">Discover your next Adventure with AI</h4>
+            <p class="card-text">Enter your ideal destination or type of trip and we will recommend options.</p>
+                
+            <form>
+                <div class="form-group">
+                    <label for="destinationInput" class="p-2">Where would you like to go?</label>
+                    <div class="d-flex p-2">
+                        <input type="text" class="form-control" id="destinationInput" placeholder="Escribe un lugar o actividad...">
+                        <button type="submit" class="btn btn-primary btn-block">Search destinations</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
