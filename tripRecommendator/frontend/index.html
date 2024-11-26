@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripRecommendator</title>
+    <link rel="icon" href="./resources/17189827.png">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css'>
+    <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+    <div class="">
+        <section class="header text-left w-100 d-flex align-items-center flex-column flex-md-row gap-3 justify-content-between px-5 py-4">
+            <div class="d-flex align-items-center gap-3">
+                <img src="./resources/17189827.png" alt="">
+                <h1>TripRecommendator</h1>
+            </div>
+            <select id="theme-select" name="theme">
+                <option value="dark">Dark</option>
+                <option value="clear">Clear</option>
+              </select>
+        </section>
+        <section class="search-section mt-5" >
+            <h4 class="text-uppercase">Discover your next <br> Adventure</h4>
+            <form class="px-5 d-flex flex-column justify-content-center align-items-center">
+                <div class="form-search d-flex flex-column gap-4">
+                    <label for="destinationInput">Where would you like to go?</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control" id="destinationInput" placeholder="Escribe un lugar o actividad...">
+                        <button type="submit" class="search-btn">Search</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="d-flex justify-content-center align-items-center mb-5 map-section">
+            <div id="map"></div>
+        </section>
+    </div>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js'></script>
+    <script src="./src/script.js" type="module"></script>
+</body>
+</html>
