@@ -1,6 +1,8 @@
 
 const themeSelect = document.getElementById('theme-select');
-const apiKey = 'UGp2hsgXicrbOIo9wCfAy2QgUboYITGS';
+
+const searchBtn = document.querySelector('.search-btn');
+const searchInput = document.getElementById('search-input');
 
 themeSelect.addEventListener('change', (event) => {
     const theme = event.target.value;
@@ -15,48 +17,52 @@ themeSelect.addEventListener('change', (event) => {
     }
 });
 
+// Inicializar el mapa
 const map = tt.map({
-    key: apiKey,
+    key: 'UGp2hsgXicrbOIo9wCfAy2QgUboYITGS',
     container: 'map',
-    center: [-74.0060, 40.7128],
-    zoom: 16,
-    pitch: 60,
+    center: [0, 0], // Coordenadas iniciales
+    zoom: 2,
 });
 
-map.addControl(new tt.FullscreenControl(), );
-map.addControl(new tt.NavigationControl());
-/* map.on('load', function() {
-    removePoiLayers();
-    requestAnimationFrame(rotateCamera);
-}) */
 
-map.on('click', function(e) {
-    // Obtén las coordenadas donde se hizo clic
-    const coordinates = e.lngLat;
-    console.log('Coordenadas clickeadas: ', coordinates);
-
-    // Crear un marcador en las coordenadas clickeadas
-    const marker = new tt.Marker()
-        .setLngLat(coordinates)
-        .addTo(map);
-
-    // Crear una ventana emergente (popup) con una imagen o cualquier contenido
-    const popup = new tt.Popup()
-        .setLngLat(coordinates)
-        .setHTML('<h3>¡Has hecho clic aquí!</h3><img src="https://via.placeholder.com/150" alt="Imagenss" />')
-        .addTo(map);
-});
-function removePoiLayers() {
-    var layers = map.getStyle().layers;
-    for (var i = 0; i < layers.length; i++) {
-        var layer = layers[i];
-        if (layer.type === 'symbol' && layer['source-layer'] === 'Point of Interest') {
-            map.removeLayer(layer.id);
-        }
+searchBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const query = searchInput.value;
+    if(!query){
+        alert('Por favor, ingrese un lugar');
+        return;
     }
+    try {
+        const response = await fetch('http://localhost:3000/api', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query }),
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+            const lat = Number(data.latitude);
+            const lon = Number(data.longitude);
+            showMap(lat, lon);
+        } else {
+            console.log('No se encontraron ubicaciones.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function showMap(lat = 0, lon = 0) {
+    lat = !isNaN(lat) ? lat : 0;
+    lon = !isNaN(lon) ? lon : 0;
+    const map = tt.map({
+        key: 'UGp2hsgXicrbOIo9wCfAy2QgUboYITGS',
+        container: 'map',
+        center: [lon, lat],
+        zoom: 12,
+    });
+
+    //const marker = tt.marker([lat, lon]).addTo(map);
+    //marker.bindPopup('Lugar: ' + document.getElementById('destinationInput').value).openPopup();
 }
-function rotateCamera(timestamp) {
-    var rotationDegree = timestamp / 100 % 360;
-    map.rotateTo(rotationDegree, { duration: 0 });
-    requestAnimationFrame(rotateCamera);
-} 
