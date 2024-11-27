@@ -8,7 +8,7 @@ themeSelect.addEventListener('change', (event) => {
     const theme = event.target.value;
     console.log(theme);
     if(theme === 'clear') {
-        document.documentElement.style.setProperty('--background-color', '#e7ecf0');
+        document.documentElement.style.setProperty('--background-color', '#cdcdcdc1');
         document.documentElement.style.setProperty('--text-color', '#26282b');
     }
     if(theme === 'dark') {
@@ -18,8 +18,89 @@ themeSelect.addEventListener('change', (event) => {
 });
 
 
+const suggest_places = [
+    {
+        imgSrc: './resources/japon.jpg',
+        title: 'Japón',
+        description: 'Japan is a beautiful and fascinating country, known for its unique blend of ancient traditions and modern innovations. From the serene temples and stunning gardens to the vibrant cityscapes and cutting-edge technology, Japan offers a rich cultural experience',
+        rating: '⭐⭐⭐⭐⭐',
+    },
+    {
+        imgSrc: './resources/japon.jpg',
+        title: 'Japón',
+        description: 'Japan is a beautiful and fascinating country, known for its unique blend of ancient traditions and modern innovations. From the serene temples and stunning gardens to the vibrant cityscapes and cutting-edge technology, Japan offers a rich cultural experience',
+        rating: '⭐⭐⭐⭐⭐',
+    },
+    {
+        imgSrc: './resources/japon.jpg',
+        title: 'Japón',
+        description: 'Japan is a beautiful and fascinating country, known for its unique blend of ancient traditions and modern innovations. From the serene temples and stunning gardens to the vibrant cityscapes and cutting-edge technology, Japan offers a rich cultural experience',
+        rating: '⭐⭐⭐⭐⭐',
+    },
+]
 
-searchBtn.addEventListener('click', async (e) => {
+
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const mapModal = document.getElementById('mapModal');
+const placesContainer = document.querySelector('#places-containers');
+const backgroundOverlay = document.getElementById('backgroundOverlay');
+
+suggest_places.forEach((place) => {
+
+    const col = document.createElement('div');
+    col.classList.add('col-12', 'col-md-4');
+    
+    const card = document.createElement('div');
+    card.classList.add('card');
+    
+    const placeBanner = document.createElement('div');
+    placeBanner.classList.add('place-banner');
+    
+    const img = document.createElement('img');
+    img.src = place.imgSrc;
+    img.alt = "Imagen del lugar";
+    img.classList.add('card-img-top');
+    
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body', 'text-center', 'd-flex', 'flex-column', 'align-items-center');
+    
+    const cardTitle = document.createElement('h5');
+    cardTitle.classList.add('card-title');
+    cardTitle.textContent = place.title;
+    
+    const cardText = document.createElement('p');
+    cardText.classList.add('card-text');
+    cardText.textContent = place.description;
+    
+    const ratingSpan = document.createElement('span');
+    ratingSpan.textContent = place.rating;
+    
+    const button = document.createElement('button');
+    button.classList.add('btn', 'btn-warning', 'mt-3');
+    button.textContent = 'Ver en el mapa';
+
+    button.addEventListener('click', () => {
+        mapModal.showModal();
+        showMap(35.6762, 139.6503);
+        backgroundOverlay.style.display = 'block';
+    });
+
+    placeBanner.appendChild(img);
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+    cardBody.appendChild(ratingSpan);
+    cardBody.appendChild(button);
+    card.appendChild(placeBanner);
+    card.appendChild(cardBody);
+    col.appendChild(card);
+
+    placesContainer.appendChild(col);
+});
+
+
+
+/* searchBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     const query = searchInput.value;
     if(!query){
@@ -44,7 +125,14 @@ searchBtn.addEventListener('click', async (e) => {
     } catch (error) {
         console.error('Error:', error);
     }
-});
+}); */
+
+
+  // Función para cerrar el modal
+  closeModalBtn.addEventListener('click', () => {
+    mapModal.close();
+    backgroundOverlay.style.display = 'none';
+  });
 
 function showMap(lat = 0, lon = 0) {
     lat = !isNaN(lat) ? lat : 0;
