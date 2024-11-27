@@ -23,18 +23,28 @@
         </section>
         <section class="search-section mt-5" >
             <h4 class="text-uppercase">Discover your next <br> Adventure</h4>
-            <form class="px-5 d-flex flex-column justify-content-center align-items-center">
-                <div class="form-search d-flex flex-column gap-4">
-                    <label for="destinationInput">Where would you like to go?</label>
+            <div class="px-5 d-flex flex-column justify-content-center align-items-center">
+                <form class="form-search d-flex flex-column gap-3">
                     <div class="d-flex">
                         <input type="text" class="form-control" id="search-input" placeholder="Escribe un lugar o actividad...">
                         <button type="submit" class="search-btn">Search</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </section>
-        <section class="d-flex justify-content-center align-items-center mb-5 map-section">
-            <div id="map"></div>
+       <!--  <section class="d-flex justify-content-center align-items-center mb-5 map-section">
+            <div id="map" style="display: none;"></div>
+        </section> -->
+        <section class="mt-5">
+            <div class="place-card w-100 bg-warning">
+                <div class="place-banner">
+                    <img src="https://via.placeholder.com/600x200" alt="Imagen del lugar" class="banner-img">
+                </div>
+    
+                <div class="place-details text-center">
+                    <h3 class="place-title">Nombre del Lugar</h3>
+                </div>
+            </div>
         </section>
     </div>
     <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js'></script>

@@ -17,13 +17,6 @@ themeSelect.addEventListener('change', (event) => {
     }
 });
 
-// Inicializar el mapa
-const map = tt.map({
-    key: 'UGp2hsgXicrbOIo9wCfAy2QgUboYITGS',
-    container: 'map',
-    center: [0, 0], // Coordenadas iniciales
-    zoom: 2,
-});
 
 
 searchBtn.addEventListener('click', async (e) => {
@@ -34,7 +27,7 @@ searchBtn.addEventListener('click', async (e) => {
         return;
     }
     try {
-        const response = await fetch('http://localhost:3000/api', {
+        const response = await fetch('http://localhost:3000/ia', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query }),

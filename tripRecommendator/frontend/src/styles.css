@@ -97,7 +97,7 @@ body{
 }
 
 .form-search input::placeholder{
-    color: var(--red-color);
+    color: rgba(81, 81, 81, 0.87);
 }
 
 .form-search input:focus{
